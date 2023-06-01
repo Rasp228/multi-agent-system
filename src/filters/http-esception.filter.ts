@@ -16,7 +16,7 @@ import {
         case 401:
         case 403:
         case 404:
-          response.status(302).redirect('/page-not-found');
+          response.status(302).redirect('/error/1');
           return;
       }
   

@@ -1,3 +1,45 @@
 <div class="container">
-    <p>Oto wyszukiwanie</p>
+    <br>
+    <h2>Zacznij wyszukiwać!</h2>
+    <br><br>
+    <form class="row g-3" action="http://localhost:3000/agents" method='post'>
+        <label for="color" class="form-label">Wybierz dominujący kolor rośliny</label>
+        <input type="color" class="form-control form-control-color bg-dark text-white" id="color" name="color" value="#f0f0f0" title="Wybierz dominujący kolor">
+        <label for="dificult" class="form-label">Trudność hodowania rośliny</label>
+        <select class="form-select bg-dark text-white" aria-label="Default select example" id="dificult" name="dificult">
+            <option value="1">Bardzo łatwy</option>
+            <option value="2">Łatwy</option>
+            <option value="3">Trudny</option>
+            <option value="4">Bardzo trudny</option>
+        </select>
+        <label for="wateringFrequency" class="form-label">Częstość podlewania rośliny</label>
+        <select class="form-select bg-dark text-white" aria-label="Default select example" id="wateringFrequency" name="wateringFrequency">
+            <option value="1">Rzadziej niż raz na miesiąc</option>
+            <option value="2">1-2 razy na miesiąc</option>
+            <option value="3">Raz na 1-2 tygodnie</option>
+            <option value="4">Ponad 2 razy w tygodniu</option>
+        </select>
+        <label for="size" class="form-label">Wielkość rośliny</label>
+        <select class="form-select bg-dark text-white" aria-label="Default select example" id="size" name="size">
+            <option value="1">Bardzo mała, mniej niż 10cm</option>
+            <option value="2">Mała 10cm - 25cm</option>
+            <option value="3">Duża 25cm - 40cm</option>
+            <option value="4">Bardzo duża, ponad 40cm</option>
+        </select>
+        <label for="sunlight" class="form-label">Poziom nasłonecznienia rośliny</label>
+        <select class="form-select bg-dark text-white" aria-label="Default select example" id="sunlight" name="sunlight">
+            <option value="1">Minimalny lub brak</option>
+            <option value="2">Mały</option>
+            <option value="3">Duży</option>
+            <option value="4">Bardzo duży</option>
+        </select>
+        <label for="harmfulness" class="form-label">Potencjalna szkodliwość</label>
+        <select class="form-select bg-dark text-white" aria-label="Default select example" id="harmfulness" name="harmfulness">
+            <option value="1">Brak</option>
+            <option value="2">Bardzo mała</option>
+            <option value="3">Mała</option>
+            <option value="4">Duża</option>
+        </select>
+        <button type="submit" class="btn btn-success w-25">Wyszukaj</button>
+    </form>
 </div>
