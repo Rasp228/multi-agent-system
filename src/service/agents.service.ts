@@ -1,19 +1,60 @@
 import { Injectable } from '@nestjs/common';
-import { EventEmitter2 } from 'eventemitter2';
+
+interface PlantFormData {
+    color: string;
+    dificult: number;
+    wateringFrequency: number;
+    size: number;
+    sunlight: number;
+    harmfullness: number;
+  }
 
 @Injectable()
-export class AgentsService {
-  private emitter: EventEmitter2;
+export class AgentService {
+    private id: number;
+    private proposal: string;
+    private goal: string;
+    private plant;
+  
+    private proposals: string[];
+    private plantData: PlantFormData;
+  
+    constructor() {
+      this.id = 0;
+      this.proposal = '';
+      this.goal = '';
+      this.proposals = [];
+      this.plant;
+    }
+    setFormData(formData: PlantFormData): void {
+        this.plantData = formData;
+    }
+    
+    setIdentifier(identifier: number): void {
+      this.id = identifier;
+    }
+  
+    setProposal(proposal: string): void {
+      this.proposal = proposal;
+    }
+  
+    setGoal(goal: string): void {
+      this.goal = goal;
+    }
+  
+    getProposals(): string[] {
+      return this.proposals;
+    }
+  
+    getProposedGoal(): string {
+      return this.goal;
+    }
 
-  constructor() {
-    this.emitter = new EventEmitter2();
-  }
+    getPlanttoClient(nPlant){
+      this.plant = nPlant;
+    }
 
-  emitEvent(eventName: string, data: any) {
-    this.emitter.emit(eventName, data);
-  }
-
-  onEvent(eventName: string, listener: (data: any) => void) {
-    this.emitter.on(eventName, listener);
-  }
+    getPlanttoShow(){
+      return this.plant;
+    }
 }
