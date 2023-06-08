@@ -1,10 +1,21 @@
 <div class="container">
-    <br>
-    <h2>Zacznij wyszukiwać!</h2>
-    <br><br>
-    <form class="row g-3" action="http://localhost:3000/result" method='post'>
+    <form class="row g-2 w-50" style="margin:0 auto" action="http://localhost:3000/result" method='post'>
+        <br>
+        <h2>Zacznij wyszukiwać!</h2>
+        <h6>Im mniejsza liczba przy priorytecie tym jest niższy</h6>
+        <br>
+        <label for="maxCost" class="form-label">Maksymalna cena (zł)</label>
+        <input type="number"  style="width:100%" class="form-control form-control-color bg-dark text-white" id="maxCost" name="maxCost" value="5" title="zł">
+        <br>
         <label for="color" class="form-label">Wybierz dominujący kolor rośliny</label>
-        <input type="color" class="form-control form-control-color bg-dark text-white" id="color" name="color" value="#f0f0f0" title="Wybierz dominujący kolor">
+        <input type="color" style="width:100%" class="form-control form-control-color bg-dark text-white" id="color" name="color" value="#f0f0f0" title="Wybierz dominujący kolor">
+        <select class="form-select bg-dark text-white" aria-label="Default select example" id="color" name="priorytet">
+            <option value="1">Priorytet: 1</option>
+            <option value="2">Priorytet: 2</option>
+            <option value="3">Priorytet: 3</option>
+            <option value="4">Priorytet: 4</option>
+        </select>
+        <br>
         <label for="dificult" class="form-label">Trudność hodowania rośliny</label>
         <select class="form-select bg-dark text-white" aria-label="Default select example" id="dificult" name="dificult">
             <option value="1">Bardzo łatwy</option>
@@ -12,6 +23,13 @@
             <option value="3">Trudny</option>
             <option value="4">Bardzo trudny</option>
         </select>
+        <select class="form-select bg-dark text-white" aria-label="Default select example" id="dificult" name="priorytet">
+            <option value="1">Priorytet: 1</option>
+            <option value="2">Priorytet: 2</option>
+            <option value="3">Priorytet: 3</option>
+            <option value="4">Priorytet: 4</option>
+        </select>
+        <br>
         <label for="wateringFrequency" class="form-label">Częstość podlewania rośliny</label>
         <select class="form-select bg-dark text-white" aria-label="Default select example" id="wateringFrequency" name="wateringFrequency">
             <option value="1">Rzadziej niż raz na miesiąc</option>
@@ -19,6 +37,13 @@
             <option value="3">Raz na 1-2 tygodnie</option>
             <option value="4">Ponad 2 razy w tygodniu</option>
         </select>
+        <select class="form-select bg-dark text-white" aria-label="Default select example" id="wateringFrequency" name="priorytet">
+            <option value="1">Priorytet: 1</option>
+            <option value="2">Priorytet: 2</option>
+            <option value="3">Priorytet: 3</option>
+            <option value="4">Priorytet: 4</option>
+        </select>
+        <br>
         <label for="size" class="form-label">Wielkość rośliny</label>
         <select class="form-select bg-dark text-white" aria-label="Default select example" id="size" name="size">
             <option value="1">Bardzo mała, mniej niż 10cm</option>
@@ -26,6 +51,13 @@
             <option value="3">Duża 25cm - 40cm</option>
             <option value="4">Bardzo duża, ponad 40cm</option>
         </select>
+        <select class="form-select bg-dark text-white" aria-label="Default select example" id="size" name="priorytet">
+            <option value="1">Priorytet: 1</option>
+            <option value="2">Priorytet: 2</option>
+            <option value="3">Priorytet: 3</option>
+            <option value="4">Priorytet: 4</option>
+        </select>
+        <br>
         <label for="sunlight" class="form-label">Poziom nasłonecznienia rośliny</label>
         <select class="form-select bg-dark text-white" aria-label="Default select example" id="sunlight" name="sunlight">
             <option value="1">Minimalny lub brak</option>
@@ -33,6 +65,13 @@
             <option value="3">Duży</option>
             <option value="4">Bardzo duży</option>
         </select>
+        <select class="form-select bg-dark text-white" aria-label="Default select example" id="sunlight" name="priorytet">
+            <option value="1">Priorytet: 1</option>
+            <option value="2">Priorytet: 2</option>
+            <option value="3">Priorytet: 3</option>
+            <option value="4">Priorytet: 4</option>
+        </select>
+        <br>
         <label for="harmfulness" class="form-label">Potencjalna szkodliwość</label>
         <select class="form-select bg-dark text-white" aria-label="Default select example" id="harmfulness" name="harmfulness">
             <option value="1">Brak</option>
@@ -40,6 +79,13 @@
             <option value="3">Mała</option>
             <option value="4">Duża</option>
         </select>
+        <select class="form-select bg-dark text-white" aria-label="Default select example" id="harmfulness" name="priorytet">
+            <option value="1">Priorytet: 1</option>
+            <option value="2">Priorytet: 2</option>
+            <option value="3">Priorytet: 3</option>
+            <option value="4">Priorytet: 4</option>
+        </select>
         <button type="submit" class="btn btn-success w-25">Wyszukaj</button>
     </form>
+    <br><br><br><br>
 </div>
