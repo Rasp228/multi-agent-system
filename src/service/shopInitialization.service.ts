@@ -29,6 +29,7 @@ export class shopInitializationService {
                 data[randomNumbers[j]].number = Math.floor(Math.random() * 7) + 1;
                 
                 shop[i].push(data[randomNumbers[j]]);
+                data[randomNumbers[j]].price = temp;
                 j++;
             }while(j < 15)
             j = 0;
@@ -46,7 +47,7 @@ export class shopInitializationService {
 
     generateRandomNumbers(quantity, min, max){
         const numbers = new Set();
-        while (numbers.size < quantity) {
+        while (numbers.size < quantity){
           const randomNumber = Math.floor(Math.random() * (max - min + 1)) + min;
           numbers.add(randomNumber);
         }
