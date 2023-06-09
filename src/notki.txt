@@ -1,6 +1,6 @@
-1. zrobić inicjalizację - i to się robi tylko raz, najlepeij zapisać w pliku albo gdzieś
-    a. wypełnienie magazynów sprzedawców (doszyfrowanie/ dopytanie polecenia)
-    b. ustalenie ilości sprzedawców
+1. zrobić inicjalizację - i to się robi tylko raz, najlepeij zapisać w pliku albo gdzieś -+
+    a. wypełnienie magazynów sprzedawców
+    b. ustalenie ilości sprzedawców ++ (jesli wystarczy w kodzie)
     c. magazyn każdego ze sprzedawców 75% losowo wybranych pozycji, w losowo ustalonych ilościach
     d. losowo zmieniana wartość parametru negocjowalnego (ceny), ale bez przekraczania 20%
 2. zrobić proces przechodzenia agentów między sklepami i spotykania agentów poszukujących z oferującymi

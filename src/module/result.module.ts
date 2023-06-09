@@ -6,10 +6,11 @@ import { ShopAgent } from 'src/service/shopAgents.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { shop } from 'src/entity/shop.entity';
 import { plant } from 'src/entity/plant.entity';
+import { shopInitializationService } from 'src/service/shopInitialization.service';
 
 @Module({
   imports: [TypeOrmModule.forFeature([shop, plant])],
   controllers: [ResultController],
-  providers: [ResultService, AgentService, ShopAgent],
+  providers: [ResultService, AgentService, ShopAgent, shopInitializationService],
 })
 export class ResultModule {}
