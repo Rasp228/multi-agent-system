@@ -1,5 +1,4 @@
 import { Entity, Column, PrimaryGeneratedColumn, ManyToOne, JoinColumn } from 'typeorm';
-import { shop } from './shop.entity';
 
 @Entity()
 export class plant {
@@ -32,8 +31,4 @@ export class plant {
 
   @Column()
   images: string;
-
-  @ManyToOne(type => shop, (shop: shop) => shop.plants)
-  @JoinColumn({name: 'shopID'})
-  shop: shop;
 }

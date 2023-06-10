@@ -1,47 +1,36 @@
 import { Injectable } from '@nestjs/common';
 
-interface PlantFormData {
-  ID: number;
-  name: string;
+interface PlantFormDataSimple {
   color: string;
   dificult: number;
   wateringFrequency: number;
   size: number;
-  sunlight: number;
+  sunlight: number;  
   harmfullness: number;
 }
 
 @Injectable()
 export class ShopAgent {
   private id: number;
-  private information: string[];
-  private informationFromShop: PlantFormData[];
-  private shop: string;
-  private plant;
+  private isAvailable: boolean;
+  private shop;
 
   constructor() {
     this.id = 0;
-    this.information = [];
-    this.shop = "";
+    this.isAvailable = true;
   }
 
-  getProposals(): string[] {
-    return this.information;
+  changeAvailability(n: boolean){
+    this.isAvailable = n;
   }
 
-  getShop(nshop: string) {
-    this.shop = nshop;
+  getShop(n){
+    this.shop = n;
   }
 
-  getShopName(): string | null{
-    return this.shop;
-  }
-
-  getDataFromShop(nInformationFromShop: PlantFormData[]){
-    this.informationFromShop = nInformationFromShop;
-  }
-
-  getInformationFromClient(nInformation: string[]){
-    this.information = nInformation;
+  compareData(n: PlantFormDataSimple){
+    let temp: PlantFormDataSimple;
+    temp = n;
+    // porównywanie z tym co ma w shop
   }
 }

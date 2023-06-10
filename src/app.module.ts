@@ -8,7 +8,6 @@ import { ErrorModule } from './module/error.module';
 import { AgentService } from './service/agents.service';
 import { ShopAgent } from './service/shopAgents.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { shop } from './entity/shop.entity';
 import { plant } from './entity/plant.entity';
 
 @Module({
@@ -20,7 +19,7 @@ import { plant } from './entity/plant.entity';
     username: 'root',
     password: '',
     database: 'shops_database',
-    entities: [shop, plant],
+    entities: [plant],
     synchronize: true,
   }),],
   controllers: [AppController],
