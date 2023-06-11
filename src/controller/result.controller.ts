@@ -69,10 +69,9 @@ export class ResultController {
       i = 0;
       do{
         let temp = new ShopAgent;
-        temp.getShop(shops[i]);
+        temp.setShop(shops[i]);
         shopAgents.push(temp);
 
-        this.negotiationShop(i);
         i++;
       }while(i < sellerNumber);
 
@@ -83,18 +82,26 @@ export class ResultController {
 ///
 /// negocjacja agenta klienta
   async startClientAgentNegotiation(agentIndex) {
-    // szukanie agenta sklepu
-    // jeśli dostepny to negocjowanie
+    let i = 0
+    do{
+      if(shopAgents[i].getAvailability()){
+        this.negotiationShop(i, agents[agentIndex].getSimpleFormData())
+        // start negocjacji z obecnym i wymyślić zakończenie
+      }
+      i++
+    }while(i < sellerNumber)
     // podanie parametrow (bez priorytetow i ceny)
-    // start petli, dyskucji
+    // start petli, dyskusji
     // odbior propozycji
     // zaakceptowanie lub odrzucenie (do np 10 odrzuceń)
     // przypisanie propozycji bądź dalsze poszukiwanie agenta sklepu (do np. 10 nieudanych)
   }
 ///
 /// negocjacja z sklepem
-  async negotiationShop(agentIndex) {
-    //odebranie parametrow od agenta
+  async negotiationShop(agentIndex, simpleFormData) {
+    shopAgents[agentIndex].changeAvailability(false);
+    let planList = shopAgents[agentIndex].compareData(simpleFormData);
+    return plantList//zwrocic to co podał agent sklepu
     //zaproponowanie czegos
   }
 ///

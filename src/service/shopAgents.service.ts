@@ -14,6 +14,7 @@ export class ShopAgent {
   private id: number;
   private isAvailable: boolean;
   private shop;
+  private plantList: [];
 
   constructor() {
     this.id = 0;
@@ -24,13 +25,23 @@ export class ShopAgent {
     this.isAvailable = n;
   }
 
-  getShop(n){
+  setShop(n){
     this.shop = n;
   }
 
   compareData(n: PlantFormDataSimple){
     let temp: PlantFormDataSimple;
     temp = n;
-    // porównywanie z tym co ma w shop
+
+    if(temp.color == this.shop.color){ // poprawić porównywanie bo w shop przecież powinna być lista roślin
+      this.plantList.push()// wkladać poprawne rosliny
+      console.log("test czy cos")    // porównywanie z tym co ma w shop
+    }
+
+    return this.plantList;
+  }
+
+  getAvailability(): boolean{
+    return this.isAvailable;
   }
 }

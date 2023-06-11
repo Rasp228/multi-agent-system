@@ -16,6 +16,15 @@ interface PlantFormData {
   harmfullnessPriority: number;
 }
 
+interface PlantFormDataSimple {
+  color: string;
+  dificult: number;
+  wateringFrequency: number;
+  size: number;
+  sunlight: number;  
+  harmfullness: number;
+}
+
 @Injectable()
 export class AgentService {
     private id: number;
@@ -27,5 +36,17 @@ export class AgentService {
 
     setFormData(formData: PlantFormData): void {
         this.plantData = formData;
+    }
+
+    getSimpleFormData(): PlantFormDataSimple{
+      const simplifiedData: PlantFormDataSimple = {
+        color: this.plantData.color,
+        dificult: this.plantData.dificult,
+        wateringFrequency: this.plantData.wateringFrequency,
+        size: this.plantData.size,
+        sunlight: this.plantData.sunlight,
+        harmfullness: this.plantData.harmfullness,
+      };
+      return simplifiedData;
     }
 }
