@@ -11,13 +11,11 @@ interface PlantFormDataSimple {
 
 @Injectable()
 export class ShopAgent {
-  private id: number;
   private isAvailable: boolean;
   private shop;
-  private plantList: [];
+  private plantList: any[] = [];
 
   constructor() {
-    this.id = 0;
     this.isAvailable = true;
   }
 
@@ -30,18 +28,84 @@ export class ShopAgent {
   }
 
   compareData(n: PlantFormDataSimple){
-    let temp: PlantFormDataSimple;
-    temp = n;
-
-    if(temp.color == this.shop.color){ // poprawić porównywanie bo w shop przecież powinna być lista roślin
-      this.plantList.push()// wkladać poprawne rosliny
-      console.log("test czy cos")    // porównywanie z tym co ma w shop
+    for (const plant of this.shop) {
+      const isMatch = this.areParamsMatched(n, plant);
+      if (isMatch && !this.plantList.includes(plant)) {
+        this.plantList.push(plant);
+      }
     }
-
+    console.log(this.plantList)
     return this.plantList;
   }
 
   getAvailability(): boolean{
     return this.isAvailable;
+  }
+
+  areParamsMatched(n: PlantFormDataSimple, plant): boolean {
+    const isColorMatched = true;
+    let isDifficultyMatched = false, isWateringFrequencyMatched = false, isSizeMatched = false, isSunlightMatched = false, isHarmfulnessMatched = false;
+    let pDifficult: number[] = this.normalizeNumbers(plant.dificult);
+    let pWateringFrequency: number[] = this.normalizeNumbers(plant.wateringFrequency);
+    let pSize: number[] = this.normalizeNumbers(plant.size);
+    let pSunlight: number[] = this.normalizeNumbers(plant.sunlight);
+    let pHarmfulness: number[] = this.normalizeNumbers(plant.harmfullness);
+    
+    const MAX_DIFFERENCE = Math.floor(Math.random() * 2);
+
+    if(pDifficult[n.dificult] > MAX_DIFFERENCE){
+      isDifficultyMatched = true;
+    }else{
+      isDifficultyMatched = false;
+    }
+    console.log(plant)
+    console.log(pDifficult[n.dificult])
+    console.log(plant.dificult)
+    console.log(pDifficult[0],pDifficult[1],pDifficult[2],pDifficult[3])
+    console.log(n.dificult)
+    console.log(pDifficult[n.dificult] > MAX_DIFFERENCE)
+    console.log(isDifficultyMatched)
+    if(pWateringFrequency[n.wateringFrequency] > MAX_DIFFERENCE){
+      isWateringFrequencyMatched = true;
+    }else{
+      isWateringFrequencyMatched = false;
+    }
+    if(pSize[n.size] > MAX_DIFFERENCE){
+      isSizeMatched = true;
+    }else{
+      isSizeMatched = false;
+    }
+    if(pSunlight[n.sunlight] > MAX_DIFFERENCE){
+      isSunlightMatched = true;
+    }else{
+      isSunlightMatched = false;
+    }
+    if(pHarmfulness[n.harmfullness] > MAX_DIFFERENCE){
+      isHarmfulnessMatched = true;
+    }else{
+      isHarmfulnessMatched = false;
+    }
+    let temp = 0, result = false;
+    if(isColorMatched){ temp++ }
+    if(isDifficultyMatched){ temp++ }
+    if(isWateringFrequencyMatched){ temp++ }
+    if(isSizeMatched){ temp++ }
+    if(isSunlightMatched){ temp++ }
+    if(isHarmfulnessMatched){ temp++ }
+
+    if (temp > 3 + Math.floor(Math.random() * 3)){
+      result = true;
+    }
+  
+    return result;
+  }
+
+  normalizeNumbers(number: number): number[]{
+    let temp: number[] = [0, 0, 0, 0];
+    temp[3] = number % 10;
+    temp[2] = Math.floor((number % 100) / 10);
+    temp[1] = Math.floor((number % 1000) / 100);
+    temp[0] = Math.floor(number / 1000);
+    return temp;
   }
 }

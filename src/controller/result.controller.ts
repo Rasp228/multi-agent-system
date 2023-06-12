@@ -20,8 +20,21 @@ interface PlantFormData {
   harmfullness: number;
   harmfullnessPriority: number;
 }
-let data = [], agents = [], shopAgents = [], functions = [];
-let questionToShop, questionToClient, sellerNumber, agentsNumber, shops;
+
+interface Plant {
+  ID: number;
+  shopID: number;
+  name: string;
+  color: string;
+  dificult: number;
+  wateringFrequency: number;
+  size: number;
+  sunlight: number;
+  harmfullness: number;
+  images: string;
+}
+let data = [], agents = [], shopAgents = [];
+let sellerNumber, agentsNumber, shops;
 let webRender = async()=>{};
 
 @Controller()
@@ -35,7 +48,7 @@ export class ResultController {
 /// wejscie na adres
   @Post('result')
   async getDataAndSend(@Body() FormData: PlantFormData, @Res() res) {
-    data = []; agents = []; shopAgents = []; functions = [];
+    data = []; agents = []; shopAgents = [];
 
     this.resultService.emitEvent('clientData', FormData);
 
@@ -51,22 +64,9 @@ export class ResultController {
 
     this.resultService.onEvent('clientData', async(formData) => {
       let i = 0;
-      do{
-        let temp = new AgentService;
-        temp.setFormData(formData);
-        agents.push(temp);
-
-        this.startClientAgentNegotiation(i);
-
-        //functions.push(questionToClient = async (plant) => {
-          //await agents[i].setPlanttoClient(plant);
-        //})
-        i++;
-      }while(i < agentsNumber);
-
+      const promises = [];
       shops = await this.jsonService.readDataFile();
 
-      i = 0;
       do{
         let temp = new ShopAgent;
         temp.setShop(shops[i]);
@@ -75,42 +75,68 @@ export class ResultController {
         i++;
       }while(i < sellerNumber);
 
-      await this.resultService.emitEvent('endNegotiation', "end");
+      i = 0;
+      do{
+        let temp = new AgentService;
+        temp.setFormData(formData);
+        agents.push(temp);
+
+        promises.push(this.startClientAgentNegotiation(i));
+
+        i++;
+      }while(i < agentsNumber);
+
+      await Promise.all(promises);
+
+      this.resultService.emitEvent('endNegotiation', "end");
     });
     await this.sendDataToUser();
   }
 ///
 /// negocjacja agenta klienta
   async startClientAgentNegotiation(agentIndex) {
+    console.log(`Rozpoczęcie dla agenta ${agentIndex}`);
     let i = 0
     do{
-      if(shopAgents[i].getAvailability()){
-        this.negotiationShop(i, agents[agentIndex].getSimpleFormData())
-        // start negocjacji z obecnym i wymyślić zakończenie
+      let tempTab = this.generateRandomNumbers(sellerNumber, 0, sellerNumber-1) as number[];
+      if(shopAgents[tempTab[i]].getAvailability()){
+        let plantList: Plant[] = await this.negotiationShop(i, agents[agentIndex].getSimpleFormData());
+        agents[agentIndex].setProposition(plantList);
+        console.log(`Zakończenie dla agenta ${agentIndex}`);
+        return;
+      }else{
+        i--
       }
       i++
     }while(i < sellerNumber)
-    // podanie parametrow (bez priorytetow i ceny)
-    // start petli, dyskusji
-    // odbior propozycji
-    // zaakceptowanie lub odrzucenie (do np 10 odrzuceń)
-    // przypisanie propozycji bądź dalsze poszukiwanie agenta sklepu (do np. 10 nieudanych)
   }
 ///
 /// negocjacja z sklepem
-  async negotiationShop(agentIndex, simpleFormData) {
+  async negotiationShop(agentIndex, simpleFormData): Promise<Plant[]> {
     shopAgents[agentIndex].changeAvailability(false);
-    let planList = shopAgents[agentIndex].compareData(simpleFormData);
-    return plantList//zwrocic to co podał agent sklepu
-    //zaproponowanie czegos
+    let plantList = shopAgents[agentIndex].compareData(simpleFormData);
+    shopAgents[agentIndex].changeAvailability(true);
+    return plantList;
   }
 ///
 /// przesłanie danych do wyświetlenia i zebranie wyników
   async sendDataToUser() {
     this.resultService.onEvent('endNegotiation', async(response) => {
-      //zebranie propozycji od agentow + oczekiwanie na nie
+      let i = 0;
+      do{
+        data[i] = await agents[i].findBestMatchedPlant();
+        i++;
+      }while(i<agentsNumber)
       webRender();
     });
   }
 ///
+  generateRandomNumbers(quantity, min, max){
+    const numbers = new Set();
+    while (numbers.size < quantity){
+      const randomNumber = Math.floor(Math.random() * (max - min + 1)) + min;
+      numbers.add(randomNumber);
+    }
+    return Array.from(numbers);
+  }
 }
