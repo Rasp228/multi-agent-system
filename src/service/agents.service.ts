@@ -15,7 +15,6 @@ interface PlantFormData {
   harmfullness: number;
   harmfullnessPriority: number;
 }
-
 interface PlantFormDataSimple {
   color: string;
   dificult: number;
@@ -24,7 +23,6 @@ interface PlantFormDataSimple {
   sunlight: number;  
   harmfullness: number;
 }
-
 interface Plant {
   ID: number;
   shopID: number;
@@ -43,7 +41,6 @@ interface Plant {
 export class AgentService {
     private plantData: PlantFormData;
     private plantList: Plant[];
-  
     constructor() {}
 
     setFormData(formData: PlantFormData): void {
@@ -140,7 +137,6 @@ export class AgentService {
         if(this.plantData.maxCost < plant.price){
           matchScore = -1;
         }
-  
       return matchScore;
     }
 

@@ -20,7 +20,6 @@ interface PlantFormData {
   harmfullness: number;
   harmfullnessPriority: number;
 }
-
 interface Plant {
   ID: number;
   shopID: number;

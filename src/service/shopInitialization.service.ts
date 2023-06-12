@@ -26,6 +26,7 @@ export class shopInitializationService {
           do{
               shop[i] = [];
               randomNumbers = this.generateRandomNumbers(15, 0, 20) as number[];
+              j = 0;
               do{
                   let temp = data[randomNumbers[j]].price;
                   const deviation = temp * 0.1;
@@ -39,7 +40,7 @@ export class shopInitializationService {
                   data[randomNumbers[j]].price = temp; 
                   j++;
               }while(j < 15)
-              j = 0;
+
               i++;
           }while(i < sellerNumber)
 
@@ -47,7 +48,6 @@ export class shopInitializationService {
           console.log('Dane zostały zapisane.');
         }
     }
-
     generateRandomNumbers(quantity, min, max){
         const numbers = new Set();
         while (numbers.size < quantity){
