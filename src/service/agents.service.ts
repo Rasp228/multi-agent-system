@@ -60,7 +60,6 @@ export class AgentService {
       if(this.plantList!=null){
         for (let i = 0; i<15; i++) {
           if(this.plantList[i] == null){
-            //console.log(bestMatchedPlant);
             return bestMatchedPlant;
           }
           const plant = this.plantList[i];
@@ -71,7 +70,6 @@ export class AgentService {
           }
         }
       }
-      //console.log(bestMatchedPlant);
       return bestMatchedPlant;
     }
   
@@ -83,41 +81,46 @@ export class AgentService {
       let pHarmfulness: number[] = this.normalizeNumbers(plant.harmfullness);
       let colorMatch = 0, difficultyMatch = 0, wateringFrequencyMatch = 0, sizeMatch = 0, sunlightMatch = 0, harmfulnessMatch = 0;
       let biggestValue = [0, 0, 0, 0, 0, 0];
-      let i = 0;
-      do{
+     // let i = 0;
+      //do{
         colorMatch = 1;
-        difficultyMatch = Math.abs(pDifficult[i] - this.plantData.dificult) <= 3 ? Number(this.plantData.dificultPriority)+Number(pDifficult[i]) : 0;
-        if(biggestValue[1] < difficultyMatch){
+        difficultyMatch = pDifficult[this.plantData.dificult] * this.plantData.dificultPriority;
+        //difficultyMatch = Math.abs(pDifficult[i] - this.plantData.dificult) <= 3 ? Number(this.plantData.dificultPriority)+Number(pDifficult[i]) : 0;
+       /* if(biggestValue[1] < difficultyMatch){
           biggestValue[1] = difficultyMatch;
         }else{
           difficultyMatch = biggestValue[1];
-        }
-        wateringFrequencyMatch = Math.abs(pWateringFrequency[i] - this.plantData.wateringFrequency) <= 3 ? Number(this.plantData.wateringFrequencyPriority)+Number(pWateringFrequency[i]) : 0;
-        if(biggestValue[2] < wateringFrequencyMatch){
+        }*/
+        wateringFrequencyMatch = pWateringFrequency[this.plantData.wateringFrequency] * this.plantData.wateringFrequencyPriority;
+        //wateringFrequencyMatch = Math.abs(pWateringFrequency[i] - this.plantData.wateringFrequency) <= 3 ? Number(this.plantData.wateringFrequencyPriority)+Number(pWateringFrequency[i]) : 0;
+        /*if(biggestValue[2] < wateringFrequencyMatch){
           biggestValue[2] = wateringFrequencyMatch;
         }else{
           wateringFrequencyMatch = biggestValue[2];
-        }
-        sizeMatch = Math.abs(pSize[i] - this.plantData.size) <= 3 ? Number(this.plantData.sizePriority)+Number(pSize[i]) : 0;
-        if(biggestValue[3] < sizeMatch){
+        }*/
+        sizeMatch = pSize[this.plantData.size] * this.plantData.sizePriority;
+        //sizeMatch = Math.abs(pSize[i] - this.plantData.size) <= 3 ? Number(this.plantData.sizePriority)+Number(pSize[i]) : 0;
+        /*if(biggestValue[3] < sizeMatch){
           biggestValue[3] = sizeMatch;
         }else{
           sizeMatch = biggestValue[3];
-        }
-        sunlightMatch = Math.abs(pSunlight[i] - this.plantData.sunlight) <= 3 ? Number(this.plantData.sunlightPriority)+Number(pSunlight[i]) : 0;
-        if(biggestValue[4] < sunlightMatch){
+        }*/
+        sunlightMatch = pSunlight[this.plantData.sunlight] * this.plantData.sunlightPriority;
+        //sunlightMatch = Math.abs(pSunlight[i] - this.plantData.sunlight) <= 3 ? Number(this.plantData.sunlightPriority)+Number(pSunlight[i]) : 0;
+        /*if(biggestValue[4] < sunlightMatch){
           biggestValue[4] = sunlightMatch;
         }else{
           sunlightMatch = biggestValue[4];
-        }
-        harmfulnessMatch = Math.abs(pHarmfulness[i] - this.plantData.harmfullness) <= 3 ? Number(this.plantData.harmfullnessPriority)+Number(pHarmfulness[i]) : 0;
-        if(biggestValue[5] < harmfulnessMatch){
+        }*/
+        harmfulnessMatch = pHarmfulness[this.plantData.harmfullness] * this.plantData.harmfullnessPriority;
+        //harmfulnessMatch = Math.abs(pHarmfulness[i] - this.plantData.harmfullness) <= 3 ? Number(this.plantData.harmfullnessPriority)+Number(pHarmfulness[i]) : 0;
+        /*if(biggestValue[5] < harmfulnessMatch){
           biggestValue[5] = harmfulnessMatch;
         }else{
           harmfulnessMatch = biggestValue[5];
-        }
-        i++;
-      }while(i < 4)
+        }*/
+       // i++;
+     // }while(i < 4)
   
       let rand = Math.floor(Math.random() * 4);
 

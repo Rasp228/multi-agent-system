@@ -34,7 +34,7 @@ export class shopInitializationService {
 
                   data[randomNumbers[j]].price = Number((Math.random() * (max - min) + min).toFixed(2));
                   data[randomNumbers[j]].number = Math.floor(Math.random() * 7) + 1;
-                  
+
                   shop[i].push(data[randomNumbers[j]]);
                   data[randomNumbers[j]].price = temp;
                   j++;
