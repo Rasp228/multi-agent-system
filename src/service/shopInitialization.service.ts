@@ -17,7 +17,7 @@ export class shopInitializationService {
           let randomNumbers;
 
           do{
-            data[i].price = Number((Math.random() * (200 - 1) + 1).toFixed(2));
+            data[i].price = Number((Math.random() * (100 - 1) + 1).toFixed(2));
             data[i].number = 0;
             i++
           }while(i<21)
@@ -36,7 +36,7 @@ export class shopInitializationService {
                   data[randomNumbers[j]].number = Math.floor(Math.random() * 7) + 1;
 
                   shop[i].push(data[randomNumbers[j]]);
-                  data[randomNumbers[j]].price = temp;
+                  data[randomNumbers[j]].price = temp; 
                   j++;
               }while(j < 15)
               j = 0;

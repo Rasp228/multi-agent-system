@@ -32,6 +32,7 @@ interface Plant {
   sunlight: number;
   harmfullness: number;
   images: string;
+  price: number;
 }
 let data = [], agents = [], shopAgents = [];
 let sellerNumber, agentsNumber, shops;

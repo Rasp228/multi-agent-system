@@ -34,7 +34,6 @@ export class ShopAgent {
         this.plantList.push(plant);
       }
     }
-    console.log(this.plantList)
     return this.plantList;
   }
 
@@ -58,13 +57,6 @@ export class ShopAgent {
     }else{
       isDifficultyMatched = false;
     }
-    console.log(plant)
-    console.log(pDifficult[n.dificult])
-    console.log(plant.dificult)
-    console.log(pDifficult[0],pDifficult[1],pDifficult[2],pDifficult[3])
-    console.log(n.dificult)
-    console.log(pDifficult[n.dificult] > MAX_DIFFERENCE)
-    console.log(isDifficultyMatched)
     if(pWateringFrequency[n.wateringFrequency] > MAX_DIFFERENCE){
       isWateringFrequencyMatched = true;
     }else{
@@ -93,7 +85,7 @@ export class ShopAgent {
     if(isSunlightMatched){ temp++ }
     if(isHarmfulnessMatched){ temp++ }
 
-    if (temp > 3 + Math.floor(Math.random() * 3)){
+    if (temp > 2 + Math.floor(Math.random() * 3)){
       result = true;
     }
   

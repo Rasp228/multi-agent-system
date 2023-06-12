@@ -36,6 +36,7 @@ interface Plant {
   sunlight: number;
   harmfullness: number;
   images: string;
+  price: number;
 }
 
 @Injectable()
@@ -64,7 +65,7 @@ export class AgentService {
           }
           const plant = this.plantList[i];
           const matchScore = this.calculateMatchScore(plant);
-          if (matchScore > bestMatchScore) {
+          if (matchScore >= bestMatchScore) {
             bestMatchScore = matchScore;
             bestMatchedPlant = plant;
           }
@@ -80,57 +81,65 @@ export class AgentService {
       let pSunlight: number[] = this.normalizeNumbers(plant.sunlight);
       let pHarmfulness: number[] = this.normalizeNumbers(plant.harmfullness);
       let colorMatch = 0, difficultyMatch = 0, wateringFrequencyMatch = 0, sizeMatch = 0, sunlightMatch = 0, harmfulnessMatch = 0;
-      let biggestValue = [0, 0, 0, 0, 0, 0];
-     // let i = 0;
-      //do{
-        colorMatch = 1;
-        difficultyMatch = pDifficult[this.plantData.dificult] * this.plantData.dificultPriority;
-        //difficultyMatch = Math.abs(pDifficult[i] - this.plantData.dificult) <= 3 ? Number(this.plantData.dificultPriority)+Number(pDifficult[i]) : 0;
-       /* if(biggestValue[1] < difficultyMatch){
-          biggestValue[1] = difficultyMatch;
-        }else{
-          difficultyMatch = biggestValue[1];
-        }*/
-        wateringFrequencyMatch = pWateringFrequency[this.plantData.wateringFrequency] * this.plantData.wateringFrequencyPriority;
-        //wateringFrequencyMatch = Math.abs(pWateringFrequency[i] - this.plantData.wateringFrequency) <= 3 ? Number(this.plantData.wateringFrequencyPriority)+Number(pWateringFrequency[i]) : 0;
-        /*if(biggestValue[2] < wateringFrequencyMatch){
-          biggestValue[2] = wateringFrequencyMatch;
-        }else{
-          wateringFrequencyMatch = biggestValue[2];
-        }*/
-        sizeMatch = pSize[this.plantData.size] * this.plantData.sizePriority;
-        //sizeMatch = Math.abs(pSize[i] - this.plantData.size) <= 3 ? Number(this.plantData.sizePriority)+Number(pSize[i]) : 0;
-        /*if(biggestValue[3] < sizeMatch){
-          biggestValue[3] = sizeMatch;
-        }else{
-          sizeMatch = biggestValue[3];
-        }*/
-        sunlightMatch = pSunlight[this.plantData.sunlight] * this.plantData.sunlightPriority;
-        //sunlightMatch = Math.abs(pSunlight[i] - this.plantData.sunlight) <= 3 ? Number(this.plantData.sunlightPriority)+Number(pSunlight[i]) : 0;
-        /*if(biggestValue[4] < sunlightMatch){
-          biggestValue[4] = sunlightMatch;
-        }else{
-          sunlightMatch = biggestValue[4];
-        }*/
-        harmfulnessMatch = pHarmfulness[this.plantData.harmfullness] * this.plantData.harmfullnessPriority;
-        //harmfulnessMatch = Math.abs(pHarmfulness[i] - this.plantData.harmfullness) <= 3 ? Number(this.plantData.harmfullnessPriority)+Number(pHarmfulness[i]) : 0;
-        /*if(biggestValue[5] < harmfulnessMatch){
-          biggestValue[5] = harmfulnessMatch;
-        }else{
-          harmfulnessMatch = biggestValue[5];
-        }*/
-       // i++;
-     // }while(i < 4)
-  
-      let rand = Math.floor(Math.random() * 4);
 
-      const matchScore =
+      const colorsAreSimilar = this.calculateColorDifference(plant.color, this.plantData.color);
+      let temp = 765;
+      temp = temp - colorsAreSimilar;
+      colorMatch = temp/10;
+
+      difficultyMatch = pDifficult[this.plantData.dificult -1] * this.plantData.dificultPriority;
+      if(pDifficult[this.plantData.dificult -2] != null){
+        difficultyMatch += pDifficult[this.plantData.dificult -2] * this.plantData.dificultPriority/2;
+      }
+      if(pDifficult[this.plantData.dificult] != null){
+        difficultyMatch += pDifficult[this.plantData.dificult] * this.plantData.dificultPriority/2;
+      }
+
+      wateringFrequencyMatch = pWateringFrequency[this.plantData.wateringFrequency -1] * this.plantData.wateringFrequencyPriority;
+      if(pWateringFrequency[this.plantData.wateringFrequency -2] != null){
+        wateringFrequencyMatch += pWateringFrequency[this.plantData.wateringFrequency -2] * this.plantData.wateringFrequencyPriority/2;
+      }
+      if(pWateringFrequency[this.plantData.wateringFrequency] != null){
+        wateringFrequencyMatch += pWateringFrequency[this.plantData.wateringFrequency] * this.plantData.wateringFrequencyPriority/2;
+      }
+
+      sizeMatch = pSize[this.plantData.size -1] * this.plantData.sizePriority;
+      if(pSize[this.plantData.size -2] != null){
+        sizeMatch += pSize[this.plantData.size -2] * this.plantData.sizePriority/2;
+      }
+      if(pSize[this.plantData.size] != null){
+        sizeMatch += pSize[this.plantData.size] * this.plantData.sizePriority/2;
+      }
+
+      sunlightMatch = pSunlight[this.plantData.sunlight -1] * this.plantData.sunlightPriority;
+      if(pSunlight[this.plantData.sunlight -2] != null){
+        sunlightMatch += pSunlight[this.plantData.sunlight -2] * this.plantData.sunlightPriority/2;
+      }
+      if(pSunlight[this.plantData.sunlight] != null){
+        sunlightMatch += pSunlight[this.plantData.sunlight] * this.plantData.sunlightPriority/2;
+      }
+
+      harmfulnessMatch = pHarmfulness[this.plantData.harmfullness -1] * this.plantData.harmfullnessPriority;
+      if(pHarmfulness[this.plantData.harmfullness -2] != null){
+        harmfulnessMatch += pHarmfulness[this.plantData.harmfullness -2] * this.plantData.harmfullnessPriority/2;
+      }
+      if(pHarmfulness[this.plantData.harmfullness] != null){
+        harmfulnessMatch += pHarmfulness[this.plantData.harmfullness] * this.plantData.harmfullnessPriority/2;
+      }
+  
+      let rand = Math.floor(Math.random() * 8);
+
+      let matchScore =
         colorMatch +
         difficultyMatch +
         wateringFrequencyMatch +
         sizeMatch +
         sunlightMatch +
         harmfulnessMatch + rand;
+
+        if(this.plantData.maxCost < plant.price){
+          matchScore = -1;
+        }
   
       return matchScore;
     }
@@ -149,10 +158,27 @@ export class AgentService {
 
     normalizeNumbers(number: number): number[]{
       let temp: number[] = [0, 0, 0, 0];
-      temp[0] = number % 10;
-      temp[1] = Math.floor((number % 100) / 10);
-      temp[2] = Math.floor((number % 1000) / 100);
-      temp[3] = Math.floor(number / 1000);
+      temp[3] = number % 10;
+      temp[2] = Math.floor((number % 100) / 10);
+      temp[1] = Math.floor((number % 1000) / 100);
+      temp[0] = Math.floor(number / 1000);
       return temp;
+    }
+
+    convertHexColor(color: string): string {
+      return color.replace("#", "");
+    }
+    
+    calculateColorDifference(color1: string, color2: string): number {
+      const convertedColor1 = this.convertHexColor(color1);
+      const convertedColor2 = this.convertHexColor(color2);
+    
+      let matching = 0;
+      for (let i = 0; i < convertedColor1.length; i += 2) {
+        const value1 = parseInt(convertedColor1.substr(i, 2), 16);
+        const value2 = parseInt(convertedColor2.substr(i, 2), 16);
+        matching += Math.abs(value1 - value2);
+      }
+      return matching;
     }
 }

@@ -9,6 +9,7 @@ import { AgentService } from './service/agents.service';
 import { ShopAgent } from './service/shopAgents.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { plant } from './entity/plant.entity';
+import { selectedController } from './controller/selected.controller';
 
 @Module({
   imports: [HomeModule, SearchModule, ResultModule, ErrorModule, 
@@ -22,7 +23,7 @@ import { plant } from './entity/plant.entity';
     entities: [plant],
     synchronize: true,
   }),],
-  controllers: [AppController],
+  controllers: [AppController, selectedController],
   providers: [AppService, AgentService, ShopAgent],
 })
 export class AppModule {}
