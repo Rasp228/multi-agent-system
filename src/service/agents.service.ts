@@ -82,7 +82,7 @@ export class AgentService {
       const colorsAreSimilar = this.calculateColorDifference(plant.color, this.plantData.color);
       let temp = 765;
       temp = temp - colorsAreSimilar;
-      colorMatch = temp/10;
+      colorMatch = (temp/20) * this.plantData.colorPriority;
 
       difficultyMatch = pDifficult[this.plantData.dificult -1] * this.plantData.dificultPriority;
       if(pDifficult[this.plantData.dificult -2] != null){
