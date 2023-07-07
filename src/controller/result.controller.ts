@@ -59,7 +59,7 @@ export class ResultController {
 ///
 /// inicjalizacja + oczekiwanie na dane od użytkownika
   async onModuleInit() {
-    sellerNumber = 12; agentsNumber = 25;
+    sellerNumber = 10; agentsNumber = 25;
     this.sshopInitializationService.initialization( await this.resultService.findAllPlant(), sellerNumber)
 
     this.resultService.onEvent('clientData', async(formData) => {
